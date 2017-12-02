@@ -15,7 +15,7 @@ public class Player : CharacterMover
     BoxCollider2D boxCol;
     SpriteRenderer sprRenderer;
     RaycastHit2D grounded;
-    State state = State.walking;
+    AnimationState state = AnimationState.Walking;
 
 	void Start ()
     {
@@ -33,8 +33,8 @@ public class Player : CharacterMover
             0.1f* boxCol.bounds.size.y,
             LayerMask.GetMask("Stage")
             );
-        if (!grounded.collider) SetState(State.jumping);
-        else SetState(State.walking);
+        if (!grounded.collider) SetState(AnimationState.Jumping);
+        else SetState(AnimationState.Walking);
         Move();
     }
 
@@ -45,12 +45,12 @@ public class Player : CharacterMover
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
             sprRenderer.flipX = false;
-            SetState(State.walking);
+            SetState(AnimationState.Walking);
         }
         if (0 < Input.GetAxisRaw("Horizontal"))
         {
             sprRenderer.flipX = true;
-            SetState(State.walking);
+            SetState(AnimationState.Walking);
         }
     }
 
@@ -73,19 +73,19 @@ public class Player : CharacterMover
         }
     }
 
-    void SetState(State st)
+    void SetState(AnimationState st)
     {
         /*
         switch (st)
         {
             case State.walking:
-                state = State.walking;
+                state = State.Walking;
                 walkingAnime.enabled = true;
                 jumpingAnime.enabled = false;
                 break;
 
             case State.jumping:
-                state = State.jumping;
+                state = State.Jumping;
                 walkingAnime.enabled = false;
                 jumpingAnime.enabled = true;
                 break;

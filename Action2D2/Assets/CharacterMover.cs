@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class CharacterMover : TriggerMover
 {
-    public enum State { Standing,Moving, Dying, Damaging, }
+    public enum AnimationState { Standing,Walking, Jumping,Dying, Damaging, }
 
     public int hp;
 
