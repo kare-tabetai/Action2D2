@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Animation2D" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAICAABAAAgAAQAAAAEAIAAgAAAAAAAgCBAAA=</HashCode>
+      <FileName>Assets\Animation2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterMover" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAABIAAAAAAA=</HashCode>
+      <FileName>Assets\CharacterMover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mover" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Mover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAFAgAEqAIAAAEAAAAAAAAAABAAEAEAAAIAAABAAA=</HashCode>
+      <FileName>Assets\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TriggerMover" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAACAAAAAAAAAABAAAAE=</HashCode>
+      <FileName>Assets\TriggerMover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>
