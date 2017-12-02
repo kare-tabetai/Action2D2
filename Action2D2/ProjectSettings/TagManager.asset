@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackSprite
+    uniqueID: 3314936649
+    locked: 0
+  - name: Enemy
+    uniqueID: 2433231553
+    locked: 0
+  - name: Player
+    uniqueID: 2646085879
+    locked: 0
+  - name: FrontSprite
+    uniqueID: 2573547901
+    locked: 0

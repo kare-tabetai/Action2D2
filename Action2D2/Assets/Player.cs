@@ -14,8 +14,7 @@ public class Player : CharacterMover
     Rigidbody2D rb;
     BoxCollider2D boxCol;
     SpriteRenderer sprRenderer;
-    RaycastHit2D grounded;
-    AnimationState state = AnimationState.Walking;
+    AnimationState animationState = AnimationState.Standing;
 
 	void Start ()
     {
@@ -25,37 +24,42 @@ public class Player : CharacterMover
     }
 
     void Update () {
-        grounded = Physics2D.BoxCast(
-            (Vector2)transform.position+Vector2.up*Mathf.Epsilon,
-            boxCol.bounds.size,
-            0.0f,
-            Vector2.down,
-            0.1f* boxCol.bounds.size.y,
-            LayerMask.GetMask("Stage")
-            );
-        if (!grounded.collider) SetState(AnimationState.Jumping);
-        else SetState(AnimationState.Walking);
         Move();
     }
 
-    void FixedUpdate()
+    bool GroundedCheck()
     {
-        //横移動Update内だと壁接触時がたつくため
-        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal")* Time.deltaTime*timeScale*moveSpeed, rb.velocity.y);
-        if (Input.GetAxisRaw("Horizontal") < 0)
-        {
-            sprRenderer.flipX = false;
-            SetState(AnimationState.Walking);
-        }
-        if (0 < Input.GetAxisRaw("Horizontal"))
-        {
-            sprRenderer.flipX = true;
-            SetState(AnimationState.Walking);
-        }
+        RaycastHit2D grounded = Physics2D.BoxCast(
+            (Vector2)transform.position + Vector2.up * Mathf.Epsilon,
+            boxCol.bounds.size,
+            0.0f,
+            Vector2.down,
+            0.1f * boxCol.bounds.size.y,
+            LayerMask.GetMask("Stage")
+            );
+        if (!grounded.collider) SetAnimation(AnimationState.Jumping);
+        else SetAnimation(AnimationState.Walking);
+
+        return grounded.collider;
     }
 
     protected override void Move()
     {
+        bool grounded = GroundedCheck();
+
+        //Walk
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * timeScale * moveSpeed, rb.velocity.y);
+        if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            sprRenderer.flipX = true;
+            SetAnimation(AnimationState.Walking);
+        }
+        if (0 < Input.GetAxisRaw("Horizontal"))
+        {
+            sprRenderer.flipX = false;
+            SetAnimation(AnimationState.Walking);
+        }
+
         //Jump
         if (Input.GetButtonDown("Jump")&&grounded)
         {
@@ -73,7 +77,7 @@ public class Player : CharacterMover
         }
     }
 
-    void SetState(AnimationState st)
+    void SetAnimation(AnimationState st)
     {
         /*
         switch (st)
