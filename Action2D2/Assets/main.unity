@@ -121,11 +121,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4785183989092844, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.842
+      value: 3.24
       objectReference: {fileID: 0}
     - target: {fileID: 4785183989092844, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.425
+      value: -1.36
       objectReference: {fileID: 0}
     - target: {fileID: 4785183989092844, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
       propertyPath: m_LocalPosition.z
@@ -159,7 +159,7 @@ Prefab:
     - target: {fileID: 212754288835530196, guid: eaffa69d3f25f5240b7311f592f6fe87,
         type: 2}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
@@ -215,7 +215,6 @@ GameObject:
   m_Component:
   - component: {fileID: 908500268}
   - component: {fileID: 908500267}
-  - component: {fileID: 908500266}
   - component: {fileID: 908500265}
   m_Layer: 0
   m_Name: Main Camera
@@ -231,13 +230,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 908500264}
   m_Enabled: 1
---- !u!124 &908500266
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 908500264}
-  m_Enabled: 1
 --- !u!20 &908500267
 Camera:
   m_ObjectHideFlags: 0
@@ -246,7 +238,7 @@ Camera:
   m_GameObject: {fileID: 908500264}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -268,7 +260,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -528,7 +520,7 @@ Tilemap:
   m_Origin: {x: -6, y: -5, z: 0}
   m_Size: {x: 11, y: 7, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 6
+  m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
     e01: 0
@@ -578,22 +570,22 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1510622545}
     m_ColliderPaths:
-    - - X: -24000000
-        Y: -31999998
-      - X: -7999999
-        Y: -31999998
-      - X: -7999999
-        Y: -39999996
-      - X: 23999998
-        Y: -39999996
-      - X: 23999998
-        Y: -31999998
-      - X: 39999996
-        Y: -31999998
-      - X: 39999996
+    - - X: 39999996
         Y: -24000000
       - X: -24000000
         Y: -24000000
+      - X: -24000000
+        Y: -31999998
+      - X: -7999999
+        Y: -31999998
+      - X: -7999999
+        Y: -39999996
+      - X: 23999998
+        Y: -39999996
+      - X: 23999998
+        Y: -31999998
+      - X: 39999996
+        Y: -31999998
   m_CompositePaths:
     m_Paths:
     - - {x: 2.3999999, y: -3.1999998}
@@ -638,6 +630,72 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
+--- !u!1 &1540003497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1540003500}
+  - component: {fileID: 1540003499}
+  - component: {fileID: 1540003498}
+  m_Layer: 0
+  m_Name: WaterSurface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1540003498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1540003497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f882b265d61cab44a8498df9e727ae08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1540003499
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1540003497}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.83}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 9.82, y: 4.56}
+  m_EdgeRadius: 0
+--- !u!4 &1540003500
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1540003497}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.41, y: -4.41, z: 0.014994169}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1619144128
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +707,7 @@ GameObject:
   - component: {fileID: 1619144131}
   - component: {fileID: 1619144130}
   m_Layer: 0
-  m_Name: UnCollisionMap
+  m_Name: FrontMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
