@@ -122,11 +122,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4785183989092844, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -11.17
       objectReference: {fileID: 0}
     - target: {fileID: 4785183989092844, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9.14
       objectReference: {fileID: 0}
     - target: {fileID: 4785183989092844, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
       propertyPath: m_LocalPosition.z
@@ -199,6 +199,11 @@ Prefab:
       propertyPath: m_Offset.y
       value: 0.026061177
       objectReference: {fileID: 0}
+    - target: {fileID: 212754288835530196, guid: eaffa69d3f25f5240b7311f592f6fe87,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 61485449620795508, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}
@@ -254,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 665687071}
   - component: {fileID: 665687070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +375,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -532,7 +537,7 @@ GameObject:
   - component: {fileID: 1510622545}
   - component: {fileID: 1510622544}
   - component: {fileID: 1510622543}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CollisionMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4276,7 +4281,7 @@ GameObject:
   - component: {fileID: 1619144129}
   - component: {fileID: 1619144131}
   - component: {fileID: 1619144130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FrontMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

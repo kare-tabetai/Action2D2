@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class CharacterMover : TriggerMover
 {
-    public enum AnimationState { Standing,Walking, Jumping,Dying, Damaging, }
-
     public int hp;
 
     protected override abstract void Move();

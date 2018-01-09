@@ -8,11 +8,13 @@ public class Player : CharacterMover
 {
     public float jumpForce;
     public float moveSpeed;
+    public float e;
 
     Rigidbody2D rb;
     SpriteRenderer sprRenderer;
-    AnimationState animationState = AnimationState.Standing;
+    List<Collision2D> contactsCollisions=new List<Collision2D>();
 
+    double ColliderOffset { get { return sprRenderer.sprite.bounds.size.y/2; } }
 	void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,35 +27,46 @@ public class Player : CharacterMover
 
     bool GroundedCheck()
     {
-        RaycastHit2D grounded = Physics2D.BoxCast(
-            (Vector2)transform.position + Vector2.up * Mathf.Epsilon,
-            boxCol.bounds.size,
-            0.0f,
-            Vector2.down,
-            0.1f * boxCol.bounds.size.y,
-            LayerMask.GetMask("Stage")
-            );
-        if (!grounded.collider) SetAnimation(AnimationState.Jumping);
-        else SetAnimation(AnimationState.Walking);
+        var hitSize = sprRenderer.sprite.bounds.size.y / 2;
+        var pointA = (Vector2)transform.position + new Vector2(-hitSize, -hitSize);
+        var pointB = (Vector2)transform.position + new Vector2(hitSize, -hitSize);
+        var hit = Physics2D.OverlapArea(pointA, pointB, LayerMask.GetMask("Stage"));
+        if (hit) return true;
+        return false;
+    }
 
-        return grounded.collider;
+    private void OnDrawGizmos()
+    {
+        var hitSize = sprRenderer.sprite.bounds.size.y / 2;
+        var pointA = (Vector2)transform.position + new Vector2(-hitSize, -hitSize);
+        var pointB = (Vector2)transform.position + new Vector2(hitSize, -hitSize);
+        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(0, -hitSize), hitSize * Vector3.one);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        contactsCollisions.Add(collision);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        contactsCollisions.Remove(collision);
     }
 
     protected override void Move()
     {
         bool grounded = GroundedCheck();
+        print(grounded);
 
         //Walk
         rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * timeScale * moveSpeed, rb.velocity.y);
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
             sprRenderer.flipX = true;
-            SetAnimation(AnimationState.Walking);
         }
         if (0 < Input.GetAxisRaw("Horizontal"))
         {
             sprRenderer.flipX = false;
-            SetAnimation(AnimationState.Walking);
         }
 
         //Jump
@@ -71,25 +84,5 @@ public class Player : CharacterMover
             Destroy(gameObject);
             SceneManager.LoadScene("GameOver");
         }
-    }
-
-    void SetAnimation(AnimationState st)
-    {
-        /*
-        switch (st)
-        {
-            case State.walking:
-                state = State.Walking;
-                walkingAnime.enabled = true;
-                jumpingAnime.enabled = false;
-                break;
-
-            case State.jumping:
-                state = State.Jumping;
-                walkingAnime.enabled = false;
-                jumpingAnime.enabled = true;
-                break;
-        }
-        */
     }
 }
