@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class Player : CharacterMover
 {
-    public float jumpForce;
+    public float jumpVelocity;
     public float moveSpeed;
-    public float e;
+    public float displace;
 
     Rigidbody2D rb;
     SpriteRenderer sprRenderer;
     List<Collision2D> contactsCollisions=new List<Collision2D>();
 
-    double ColliderOffset { get { return sprRenderer.sprite.bounds.size.y/2; } }
+    const float SpriteSize = 2.0f;
 	void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,9 +27,9 @@ public class Player : CharacterMover
 
     bool GroundedCheck()
     {
-        var hitSize = sprRenderer.sprite.bounds.size.y / 2;
-        var pointA = (Vector2)transform.position + new Vector2(-hitSize, -hitSize);
-        var pointB = (Vector2)transform.position + new Vector2(hitSize, -hitSize);
+        var hitSize = sprRenderer.sprite.bounds.size.y / 2 / 2.0f;
+        var pointA = (Vector2)transform.position + new Vector2(-hitSize, 0);
+        var pointB = (Vector2)transform.position + new Vector2(hitSize, -displace);
         var hit = Physics2D.OverlapArea(pointA, pointB, LayerMask.GetMask("Stage"));
         if (hit) return true;
         return false;
@@ -37,10 +37,10 @@ public class Player : CharacterMover
 
     private void OnDrawGizmos()
     {
-        var hitSize = sprRenderer.sprite.bounds.size.y / 2;
-        var pointA = (Vector2)transform.position + new Vector2(-hitSize, -hitSize);
-        var pointB = (Vector2)transform.position + new Vector2(hitSize, -hitSize);
-        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(0, -hitSize), hitSize * Vector3.one);
+        var hitSize = SpriteSize / 2.0f/2.0f;
+        var pointA = (Vector2)transform.position + new Vector2(-hitSize, -0);
+        var pointB = (Vector2)transform.position + new Vector2(hitSize, -displace);
+        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(0, -displace/2), new Vector2(hitSize*2,displace));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -72,7 +72,7 @@ public class Player : CharacterMover
         //Jump
         if (Input.GetButtonDown("Jump")&&grounded)
         {
-            rb.AddForce(jumpForce * Vector2.up);
+            rb.velocity += new Vector2(0, jumpVelocity);
         }
     }
 
