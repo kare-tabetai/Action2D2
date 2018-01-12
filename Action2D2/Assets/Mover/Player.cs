@@ -8,11 +8,9 @@ public class Player : CharacterMover
 {
     public float jumpVelocity;
     public float moveSpeed;
-    public float displace;
 
     Rigidbody2D rb;
     SpriteRenderer sprRenderer;
-    List<Collision2D> contactsCollisions=new List<Collision2D>();
 
     const float SpriteSize = 2.0f;
 	void Start ()
@@ -25,40 +23,33 @@ public class Player : CharacterMover
         Move();
     }
 
-    bool GroundedCheck()
-    {
-        var hitSize = sprRenderer.sprite.bounds.size.y / 2 / 2.0f;
-        var pointA = (Vector2)transform.position + new Vector2(-hitSize, 0);
-        var pointB = (Vector2)transform.position + new Vector2(hitSize, -displace);
-        var hit = Physics2D.OverlapArea(pointA, pointB, LayerMask.GetMask("Stage"));
-        if (hit) return true;
-        return false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        var hitSize = SpriteSize / 2.0f/2.0f;
-        var pointA = (Vector2)transform.position + new Vector2(-hitSize, -0);
-        var pointB = (Vector2)transform.position + new Vector2(hitSize, -displace);
-        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(0, -displace/2), new Vector2(hitSize*2,displace));
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        contactsCollisions.Add(collision);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        contactsCollisions.Remove(collision);
-    }
-
     protected override void Move()
     {
         bool grounded = GroundedCheck();
         print(grounded);
 
-        //Walk
+        Walk();
+        Jump(grounded);
+    }
+
+    const float groundColliderOffest = 1.0f;
+    bool GroundedCheck()
+    {
+        var hitSize = sprRenderer.sprite.bounds.size.y / 4.0f;
+        var pointA = (Vector2)transform.position + new Vector2(-hitSize, 0);
+        var pointB = (Vector2)transform.position + new Vector2(hitSize, -groundColliderOffest);
+        var hit = Physics2D.OverlapArea(pointA, pointB, LayerMask.GetMask("Stage"));
+        if (hit) return true;
+        return false;
+    }
+    void DrawGroundCollier()
+    {
+        var hitSize = GetComponent<SpriteRenderer>().sprite.bounds.size.y / 4.0f;
+        Gizmos.DrawWireCube((Vector2)transform.position + new Vector2(0, -groundColliderOffest / 2), new Vector2(hitSize * 2, groundColliderOffest));
+    }
+
+    void Walk()
+    {
         rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * timeScale * moveSpeed, rb.velocity.y);
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
@@ -68,9 +59,13 @@ public class Player : CharacterMover
         {
             sprRenderer.flipX = false;
         }
+    }
 
-        //Jump
-        if (Input.GetButtonDown("Jump")&&grounded)
+    public float jummpingTime;
+    float jummpingTmer;
+    void Jump(bool grounded)
+    {
+        if (Input.GetButtonDown("Jump") && grounded)
         {
             rb.velocity += new Vector2(0, jumpVelocity);
         }
@@ -84,5 +79,9 @@ public class Player : CharacterMover
             Destroy(gameObject);
             SceneManager.LoadScene("GameOver");
         }
+    }
+    private void OnDrawGizmos()
+    {
+        DrawGroundCollier();
     }
 }
