@@ -217,12 +217,12 @@ Prefab:
     - target: {fileID: 114811628813294528, guid: eaffa69d3f25f5240b7311f592f6fe87,
         type: 2}
       propertyPath: jumpVelocity
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114811628813294528, guid: eaffa69d3f25f5240b7311f592f6fe87,
         type: 2}
       propertyPath: jummpingTime
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 50781798596132052, guid: eaffa69d3f25f5240b7311f592f6fe87,
         type: 2}
@@ -232,12 +232,12 @@ Prefab:
     - target: {fileID: 50781798596132052, guid: eaffa69d3f25f5240b7311f592f6fe87,
         type: 2}
       propertyPath: m_GravityScale
-      value: 1
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 114811628813294528, guid: eaffa69d3f25f5240b7311f592f6fe87,
         type: 2}
       propertyPath: gravityVelocity
-      value: -10
+      value: -100
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 61485449620795508, guid: eaffa69d3f25f5240b7311f592f6fe87, type: 2}

@@ -61,32 +61,36 @@ public class Player : CharacterMover
         }
     }
 
-    public float gravityVelocity;
     public float jummpingTime;
     float jummpingTimer;
+    bool jumppingFlag;
     void Jump(bool grounded)
     {
-        if (jummpingTimer != 0)
+        if (jumppingFlag)
         {
             jummpingTimer += Time.deltaTime;
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
-            if (!Input.GetButton("Jump"))
+
+            if (jummpingTime <= jummpingTimer)
             {
-                jummpingTimer = 0;
+                jumppingFlag = false;
             }
         }
+        
 
-        if (Input.GetButton("Jump"))
+        if (!Input.GetButton("Jump"))
+        {
+            jumppingFlag = false;
+        }
+        if (Input.GetButtonDown("Jump"))
         {
             if (grounded)
             {
-                jummpingTimer = Mathf.Epsilon;
+                jumppingFlag = true;
+                jummpingTimer = 0;
                 rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
             }
-            if (jummpingTime<=jummpingTimer)
-            {
-                jummpingTimer = 0;
-            }
+            
         }
     }
 
